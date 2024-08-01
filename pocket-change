@@ -1,0 +1,28 @@
+pocketchange
+
+Data structures
+
+User
+f_name
+l_name
+email
+password
+confirm_password(?)
+nickname
+
+Account
+type: TFSA, RRSP, Margin, Savings
+financial_institution:
+stocks:
+cash:
+
+
+Transaction
+deposit
+withdrawal
+
+
+Stock
+quantity: 
+purchase_price:
+purchase_date:
