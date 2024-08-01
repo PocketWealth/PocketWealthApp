@@ -1,24 +1,37 @@
-# README
+# PocketWealth
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
+An open-source application that allows canadians to track their personal wealth. PocketWealth is an (upcoming)
+application that will allow users to track their personal finances using a private and local application. The goal
+of pocket wealth is to provide a personal wealth tracker that doesn't require sharing information with 3rd parties
+or comprising privacy. The application is designed to be self hosted by users, so the information you provide
+never leaves your computer or server. It will allow users to track stocks, cash, TFSA, RRSP, and other investments
+available to canadians.
 
-Things you may want to cover:
+## Roadmap
+[Project Tracker](https://github.com/orgs/PocketWealth/projects/1/views/1)
 
-* Ruby version
+## Setup
 
-* System dependencies
+### Prerequisites
 
-* Configuration
+The setups steps expect following tools installed on the system.
 
-* Database creation
+- Ruby 3.2.2
+- Rails 7.2.0
 
-* Database initialization
+### 1. Check out the repository
 
-* How to run the test suite
+```bash
+git clone https://github.com/PocketWealth/PocketWealthApp.git
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### 2. Start the Rails server
 
-* Deployment instructions
+You can start the rails server using the command given below.
 
-* ...
+```ruby
+bin/rails server
+```
+
+And now you can visit the site with the URL http://localhost:3000
