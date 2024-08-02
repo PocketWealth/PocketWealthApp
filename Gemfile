@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.0.beta3"
+gem "bcrypt", "3.1.18"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use sqlite3 as the database for Active Record
@@ -20,6 +21,9 @@ gem "tailwindcss-rails"
 gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", ">= 4.0.1"
+gem "faker", "2.21.0"
+gem "will_paginate", "3.3.1"
+gem "bootstrap-will_paginate", "1.0.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -53,7 +57,12 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem "capybara", "3.37.1"
+  gem "selenium-webdriver", "4.2.0"
+  gem "webdrivers", "5.0.0"
+  gem "rails-controller-testing", "1.0.5"
+  gem "minitest", "5.15.0"
+  gem "minitest-reporters", "1.5.0"
+  gem "guard", "2.18.0"
+  gem "guard-minitest", "2.4.6"
 end
