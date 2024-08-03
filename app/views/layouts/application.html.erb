@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="emerald">
   <head>
     <title><%= content_for(:title) || "Pocket Wealth" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -17,13 +17,15 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= debug(params) if Rails.env.development? %>
-      <%= link_to "Log out", logout_path,
-                  data: { "turbo-method": :delete } %>
+    <main class="flex-col">
+      <%= render "layouts/header" %>
       <%= yield %>
     </main>
   </body>
+<footer>
+  <%= debug(params) if Rails.env.development? %>
+  <%= link_to "Log out", logout_path,
+              data: { "turbo-method": :delete } %>
+</footer>
 </html>
