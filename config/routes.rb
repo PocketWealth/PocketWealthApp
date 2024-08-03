@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :accounts
   root "public#index"
   get "sessions/new"
   get  "/signup",  to: "users#new"

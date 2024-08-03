@@ -1,0 +1,51 @@
+<div class="flex flex-row">
+  <div>
+    <%= render "layouts/sidenav" %>
+  </div>
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Accounts" %>
+
+  <div>
+    <div>
+      <h1 class="text-4xl font-bold ml-5">Accounts</h1>
+    </div>
+    <div class="flex flex-row flex-wrap gap-5 ml-5 mr-5 mt-5">
+      <div class="card bg-accent w-96 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Questrade - RRSP</h2>
+          <p>Type: RRSP</p>
+          <p>Balance: 100$</p>
+          <p>Institution: Questrade</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">View Account</button>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-accent w-96 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Questrade - RRSP</h2>
+          <p>Type: RRSP</p>
+          <p>Balance: 100$</p>
+          <p>Institution: Questrade</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">View Account</button>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-accent w-96 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Questrade - RRSP</h2>
+          <p>Type: RRSP</p>
+          <p>Balance: 100$</p>
+          <p>Institution: Questrade</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">View Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

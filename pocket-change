@@ -26,3 +26,11 @@ Stock
 quantity: 
 purchase_price:
 purchase_date:
+
+
+bin/rails generate controller public 
+
+
+bin/rails generate scaffold User name:string email:string admin:boolean password_digest:string remember_digest:string
+
+bin/rails generate controller Sessions
