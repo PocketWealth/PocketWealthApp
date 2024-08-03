@@ -1,0 +1,11 @@
+<div class="card bg-base-200 w-96 shadow-xl">
+  <div class="card-body">
+    <h2 class="card-title"><%= account.name %></h2>
+    <p>Type: <%= account.account_type %></p>
+    <p>Balance: 100$</p>
+    <p>Institution: <%= account.financial_institution %></p>
+    <div class="card-actions justify-end">
+      <%= link_to "View Account", account_path(account.id), class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>

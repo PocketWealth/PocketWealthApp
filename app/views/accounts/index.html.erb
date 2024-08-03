@@ -13,39 +13,17 @@
       <h1 class="text-4xl font-bold ml-5">Accounts</h1>
     </div>
     <div class="flex flex-row flex-wrap gap-5 ml-5 mr-5 mt-5">
-      <div class="card bg-accent w-96 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title">Questrade - RRSP</h2>
-          <p>Type: RRSP</p>
-          <p>Balance: 100$</p>
-          <p>Institution: Questrade</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">View Account</button>
+      <div class="card bg-primary w-96 shadow-xl">
+        <div class="card-body flex-1">
+          <h2 class="card-title">New Account</h2>
+          <div class="card-actions mt-auto justify-center">
+            <%= link_to "Add New Account", new_account_path, class: "btn btn-accent" %>
           </div>
         </div>
       </div>
-      <div class="card bg-accent w-96 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title">Questrade - RRSP</h2>
-          <p>Type: RRSP</p>
-          <p>Balance: 100$</p>
-          <p>Institution: Questrade</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">View Account</button>
-          </div>
-        </div>
-      </div>
-      <div class="card bg-accent w-96 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title">Questrade - RRSP</h2>
-          <p>Type: RRSP</p>
-          <p>Balance: 100$</p>
-          <p>Institution: Questrade</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">View Account</button>
-          </div>
-        </div>
-      </div>
+      <% @accounts.each do |account| %>
+        <%= render "account_preview", account: account %>
+      <% end %>
     </div>
   </div>
 </div>

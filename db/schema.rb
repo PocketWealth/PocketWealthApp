@@ -10,16 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_03_143108) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_03_215523) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
-    t.integer "type"
-    t.boolean "transaction_managed", default: false
+    t.integer "account_type"
     t.decimal "cash", default: "0.0"
     t.text "description"
     t.string "financial_institution"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "registered_account_limits_2024", force: :cascade do |t|
+    t.decimal "tfsa_limit"
+    t.decimal "rrsp_limit"
+    t.decimal "tfsa_contributions"
+    t.decimal "rrsp_contributions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_registered_account_limits_2024_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,4 +43,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_03_143108) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "accounts", "users"
+  add_foreign_key "registered_account_limits_2024", "users"
 end

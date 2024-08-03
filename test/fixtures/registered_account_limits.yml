@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+michael_account_limits:
+  tfsa_limit: 9.99
+  rrsp_limit: 9.99
+  tfsa_contributions: 9.99
+  rrsp_contributions: 9.99
+  user: michael
+
+archer_account_limits:
+  tfsa_limit: 9.99
+  rrsp_limit: 9.99
+  tfsa_contributions: 9.99
+  rrsp_contributions: 9.99
+  user: archer
