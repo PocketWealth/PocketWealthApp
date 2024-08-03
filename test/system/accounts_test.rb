@@ -18,8 +18,7 @@ class AccountsTest < ApplicationSystemTestCase
     fill_in "Description", with: @account.description
     fill_in "Financial institution", with: @account.financial_institution
     fill_in "Name", with: @account.name
-    check "Transaction managed" if @account.transaction_managed
-    fill_in "Type", with: @account.type
+    fill_in "Account Type", with: @account.account_type
     click_on "Create Account"
 
     assert_text "Account was successfully created"
@@ -34,8 +33,7 @@ class AccountsTest < ApplicationSystemTestCase
     fill_in "Description", with: @account.description
     fill_in "Financial institution", with: @account.financial_institution
     fill_in "Name", with: @account.name
-    check "Transaction managed" if @account.transaction_managed
-    fill_in "Type", with: @account.type
+    fill_in "Account Type", with: @account.account_type
     click_on "Update Account"
 
     assert_text "Account was successfully updated"

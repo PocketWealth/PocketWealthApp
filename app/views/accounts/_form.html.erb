@@ -17,13 +17,8 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :type %>
-    <%= form.number_field :type, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :transaction_managed %>
-    <%= form.check_box :transaction_managed, class: "block mt-2 h-5 w-5" %>
+    <%= form.label :account_type %>
+    <%= form.select(:account_type, Account.account_types.keys, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full") %>
   </div>
 
   <div class="my-5">

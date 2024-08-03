@@ -23,7 +23,7 @@ class AccountsController < ApplicationController
   # POST /accounts or /accounts.json
   def create
     @account = Account.new(account_params)
-
+    @account.user_id = current_user.id
     respond_to do |format|
       if @account.save
         format.html { redirect_to account_url(@account), notice: "Account was successfully created." }
@@ -66,6 +66,6 @@ class AccountsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.require(:account).permit(:name, :type, :transaction_managed, :cash, :description, :financial_institution)
+      params.require(:account).permit(:name, :type, :cash, :description, :financial_institution, :account_type)
     end
 end
