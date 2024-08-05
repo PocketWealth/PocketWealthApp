@@ -1,0 +1,8 @@
+<tr>
+  <th></th>
+  <td><%= stock.symbol %></td>
+  <td><%= stock.purchase_date %></td>
+  <td><%= stock.quantity_purchased %></td>
+  <td><%= stock.share_price %></td>
+  <td><%= link_to "Delete", delete_stock_path(stock), :stock => stock, :class => "btn btn-primary" %></td>
+</tr>

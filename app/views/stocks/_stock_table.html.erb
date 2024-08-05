@@ -1,0 +1,19 @@
+<div class="overflow-x-auto mb-5">
+  <table class="table table-xs table-pin-rows table-pin-cols">
+    <thead>
+    <tr>
+      <th></th>
+      <td>Symbol</td>
+      <td>Purchase Date</td>
+      <td>Quantity</td>
+      <td>Share Price</td>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @stocks.each do |stock| %>
+      <%= render "stocks/stock_row", stock: stock %>
+    <% end %>
+    </tbody>
+  </table>
+</div>

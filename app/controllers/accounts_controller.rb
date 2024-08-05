@@ -9,6 +9,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1 or /accounts/1.json
   def show
+    @stocks = @account.stocks
   end
 
   # GET /accounts/new

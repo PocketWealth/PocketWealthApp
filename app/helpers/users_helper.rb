@@ -6,4 +6,8 @@ module UsersHelper
       redirect_to login_url, status: :see_other
     end
   end
+
+  def accounts_for_user(user)
+    user.accounts.map { |account| account.id }
+  end
 end
