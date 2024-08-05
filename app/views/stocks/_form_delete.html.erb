@@ -1,0 +1,47 @@
+<%= form_with(model: stock, class: "contents", id: "delete-stock-form", :html => { :method => :delete }, :data => {
+  controller: "stock-delete",
+  action: "stock-delete#deleteStock:prevent",
+}) do |form| %>
+  <% if stock.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(stock.errors.count, "error") %> prohibited this stock from being saved:</h2>
+
+      <ul>
+        <% stock.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :symbol %>
+    <%= form.text_field :symbol, :readonly => true,
+                        class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :add_stock_value_to_account, "Add Value of Stocks to Account Balance?" %>
+    <p>Check this box if the value of the stock (purchase price * quantity) should be added to the cash balance of the
+      account</p>
+    <%= form.check_box :add_stock_value_to_account, class: "checkbox checkbox-accent" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit "Delete Stock", class: "rounded-lg py-3 px-5 bg-error text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
+
+<!-- Open the modal using ID.showModal() method -->
+<dialog id="delete-stock-confirm-modal" class="modal" data-controller="stock-delete">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Are you sure?</h3>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Cancel</button>
+        <button class="btn btn-error" data-action="stock-delete#deleteStockConfirm">Confirm</button>
+      </form>
+    </div>
+  </div>
+</dialog>

@@ -4,4 +4,7 @@ module ApplicationHelper
       raw file.read
     end
   end
+  def delete_stock_path(stock)
+    "/stocks/#{stock.id}/delete"
+  end
 end

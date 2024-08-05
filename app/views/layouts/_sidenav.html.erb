@@ -4,9 +4,10 @@
     <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
     <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
       <!-- Sidebar content here -->
+      <li><a class="p-3 bg-primary mb-5 font-bold">Transactions</a></li>
       <li><%= link_to "Accounts", accounts_path, class: "p-3 bg-primary mb-5 font-bold" %></li>
       <li><a class="p-3 bg-primary mb-5 font-bold">Transactions</a></li>
-      <li><a class="p-3 bg-primary mb-5 font-bold">Stocks</a></li>
+      <li><%= link_to "Stocks", stocks_path, class: "p-3 bg-primary mb-5 font-bold" %></li>
       <li><a class="p-3 bg-primary mb-5 font-bold">Other</a></li>
     </ul>
   </div>

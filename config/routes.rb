@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
-  root "public#index"
   get  "/signup",  to: "users#new"
   get  "/login",  to: "sessions#new"
   post "/login",  to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  get "/home",  to: "public#index"
+  get "/home",  to: "accounts#index"
+  get "/stocks/:id/delete",  to: "stocks#delete"
   get "sessions/new"
   resources :users
   resources :accounts
   resources :registered_account_limits
+  resources :stocks
+
+  root "accounts#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

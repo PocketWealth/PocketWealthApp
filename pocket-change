@@ -34,3 +34,26 @@ bin/rails generate controller public
 bin/rails generate scaffold User name:string email:string admin:boolean password_digest:string remember_digest:string
 
 bin/rails generate controller Sessions
+
+bin/rails generate scaffold Account name:string type:integer transaction_managed:boolean cash:decimal description:text financial_institution:string
+
+rails generate migration add_password_digest_to_users tfsa_contribution_limit:decimal rrsp_contribution_limit:decimal tfsa_contribution_total:decimal rrsp_contribution_total:decimal
+
+
+bin/rails generate model RegisteredAccountLimit tfsa_limit:decimal rrsp_limit:decimal tfsa_contributions:decimal rrsp_contributions:decimal
+
+RegisteredAccountLimit belongs_to User
+User has_one RegisteredAccountLimit
+
+
+rails g migration AddUserToRegisteredAccountLimit user:references
+
+rails generate migration RemoveTransactionManagedFromAccounts transaction_managed:boolean
+
+rails g migration AddUserToAccounts user:references
+
+rails generate controller RegisteredAccountLimits new create update destroy
+
+bin/rails generate migration ChangeAccountTypeFromIntegerToEnum
+
+bin/rails generate migration ChangePurchaseDateFromBooleanToDatetime
