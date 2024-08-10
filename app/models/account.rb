@@ -3,4 +3,5 @@ class Account < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   belongs_to :user
   has_many :stocks
+  has_many :account_balances
 end

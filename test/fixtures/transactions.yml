@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+michael_transaction:
+  type: "stock sale"
+  funds_value_added: 9.99
+  funds_value_removed: 9.99
+  funds_value_transferred: 9.99
+  stock_symbol: MyString
+  stock_quantity: MyString
+  stock_value_added: 9.99
+  stock_value_removed: 9.99
+  stock_value_transferred: 9.99
+  from_account_id: <%= ActiveRecord::FixtureSet.identify(:michael_account) %>
+
+archer_transaction:
+  type: 
+  funds_value_added: 9.99
+  funds_value_removed: 9.99
+  funds_value_transferred: 9.99
+  stock_symbol: MyString
+  stock_quantity: MyString
+  stock_value_added: 9.99
+  stock_value_removed: 9.99
+  stock_value_transferred: 9.99
+  from_account_id: <%= ActiveRecord::FixtureSet.identify(:archer_account) %>

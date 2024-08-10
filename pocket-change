@@ -56,4 +56,12 @@ rails generate controller RegisteredAccountLimits new create update destroy
 
 bin/rails generate migration ChangeAccountTypeFromIntegerToEnum
 
-bin/rails generate migration ChangePurchaseDateFromBooleanToDatetime
+bin/rails generate migration UniqueUserIdInRegisteredAccountLimits
+
+rails g migration AddFHSAToRegisteredAccountLimits fhsa_contribution_limit:decimal fhsa_contributions:decimal
+
+rails g migration RenameFhsaContributionLimitToFhsaLimit
+
+
+stocks_api_key=THF6VHDX0P9E6YRR
+rails secret: 7a53f95c64ada4bf2a9a2e220f8a4ffafff752edec3064d3b4f9a2e6eba0adaee36149e6a5fb35d3da4f646b2599b7f570dcf0eb730758b6ad44303d94670c37
