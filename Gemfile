@@ -27,6 +27,7 @@ gem "bootstrap-will_paginate", "1.0.0"
 gem "sass-rails"
 gem "rexml", ">= 3.3.3"
 gem 'faraday'
+gem "chartkick"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
