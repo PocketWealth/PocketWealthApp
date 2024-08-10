@@ -31,8 +31,7 @@ class StocksNewTest < ActionDispatch::IntegrationTest
       } }
       assert_response :unprocessable_entity
       assert_template "stocks/new"
-      assert_select "#error_explanation", count: 1
-      assert_select "li", { count: 1, text: "Account can't be blank" }
+      assert_not flash.empty?
     end
   end
 

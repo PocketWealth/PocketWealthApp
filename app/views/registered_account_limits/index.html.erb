@@ -1,0 +1,129 @@
+<div class="flex flex-row" data-controller="account-limit">
+  <div>
+    <%= render "layouts/sidenav" %>
+  </div>
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Registered Account Limits" %>
+
+
+
+  <div class="flex flex-col mr-5 max-w-screen-lg basis-full">
+    <div>
+      <h1 class="text-4xl font-bold ml-5 mb-5">Registered Account Limits And Contributions</h1>
+    </div>
+    <div class="flex flex-col ml-5 gap-5">
+      <div class="stats bg-primary text-primary-content">
+        <div class="stat">
+          <div class="stat-title">RRSP Limit</div>
+          <div>
+            <%= render "update_rrsp_limit_form", registered_account_limit: @registered_account_limit %>
+            <div id="rrsp_limit_display">
+              <% if @registered_account_limit.rrsp_limit.nil? %>
+                <div class="stat-value">Unset</div>
+              <% else %>
+                <div class="stat-value"><%=@registered_account_limit.rrsp_limit %></div>
+              <% end %>
+              <div class="stat-actions">
+                <button class="btn btn-sm btn-success" data-action="account-limit#showRRSPUpdateLimitForm">
+                  <%=@registered_account_limit.rrsp_limit.nil? ? "Set" : "Update" %> Limit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-title">RRSP Contributions</div>
+          <%= render "update_rrsp_contributions_form", registered_account_limit: @registered_account_limit %>
+          <div id="rrsp_contributions_display">
+            <% if @registered_account_limit.nil? %>
+              <div class="stat-value">0.00</div>
+            <% else %>
+              <div class="stat-value"><%=@registered_account_limit.rrsp_contributions %></div>
+            <% end %>
+            <div class="stat-actions">
+              <button class="btn btn-sm" data-action="account-limit#showRRSPUpdateContributionsForm">Update Contributions</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="stats bg-primary text-primary-content">
+        <div class="stat">
+          <div class="stat-title">TFSA Limit</div>
+          <div>
+            <%= render "update_tfsa_limit_form", registered_account_limit: @registered_account_limit %>
+            <div id="tfsa_limit_display">
+              <% if @registered_account_limit.tfsa_limit.nil? %>
+                <div class="stat-value">Unset</div>
+              <% else %>
+                <div class="stat-value"><%=@registered_account_limit.tfsa_limit %></div>
+              <% end %>
+              <div class="stat-actions">
+                <button class="btn btn-sm btn-success" data-action="account-limit#showTFSAUpdateLimitForm">
+                  <%=@registered_account_limit.tfsa_limit.nil? ? "Set" : "Update" %> Limit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-title">TFSA Contributions</div>
+          <%= render "update_tfsa_contributions_form", registered_account_limit: @registered_account_limit %>
+          <div id="tfsa_contributions_display">
+            <% if @registered_account_limit.nil? %>
+              <div class="stat-value">0.00</div>
+            <% else %>
+              <div class="stat-value"><%=@registered_account_limit.tfsa_contributions %></div>
+            <% end %>
+            <div class="stat-actions">
+              <button class="btn btn-sm" data-action="account-limit#showTFSAUpdateContributionsForm">Update Contributions</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats bg-primary text-primary-content">
+        <div class="stat">
+          <div class="stat-title">FHSA Limit</div>
+          <div>
+            <%= render "update_fhsa_limit_form", registered_account_limit: @registered_account_limit %>
+            <div id="fhsa_limit_display">
+              <% if @registered_account_limit.fhsa_limit.nil? %>
+                <div class="stat-value">Unset</div>
+              <% else %>
+                <div class="stat-value"><%=@registered_account_limit.fhsa_limit %></div>
+              <% end %>
+              <div class="stat-actions">
+                <button class="btn btn-sm btn-success" data-action="account-limit#showFHSAUpdateLimitForm">
+                  <%=@registered_account_limit.fhsa_limit.nil? ? "Set" : "Update" %> Limit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-title">FHSA Contributions</div>
+          <%= render "update_fhsa_contributions_form", registered_account_limit: @registered_account_limit %>
+          <div id="fhsa_contributions_display">
+            <% if @registered_account_limit.nil? %>
+              <div class="stat-value">0.00</div>
+            <% else %>
+              <div class="stat-value"><%=@registered_account_limit.fhsa_contributions %></div>
+            <% end %>
+            <div class="stat-actions">
+              <button class="btn btn-sm" data-action="account-limit#showFHSAUpdateContributionsForm">Update Contributions</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

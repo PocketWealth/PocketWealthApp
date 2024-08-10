@@ -26,6 +26,7 @@ gem "will_paginate", "3.3.1"
 gem "bootstrap-will_paginate", "1.0.0"
 gem "sass-rails"
 gem "rexml", ">= 3.3.3"
+gem 'faraday'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -51,6 +52,7 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+  gem 'simplecov'
 end
 
 group :development do

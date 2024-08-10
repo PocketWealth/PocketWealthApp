@@ -2,8 +2,10 @@
   <div class="card-body">
     <h2 class="card-title"><%= account.name %></h2>
     <p>Type: <%= account.account_type %></p>
-    <p>Balance: 100$</p>
-    <p>Institution: <%= account.financial_institution %></p>
+    <p>Balance: <%= account.cash %>$</p>
+    <% unless account.financial_institution.blank? %>
+      <p>Institution: <%= account.financial_institution %></p>
+    <% end %>
     <div class="card-actions justify-end">
       <%= link_to "View Account", account_path(account.id), class: "btn btn-primary" %>
     </div>

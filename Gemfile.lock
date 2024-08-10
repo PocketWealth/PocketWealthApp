@@ -103,10 +103,16 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    docile (1.4.1)
     drb (2.2.1)
     erubi (1.13.0)
     faker (2.21.0)
       i18n (>= 1.8.11, < 2)
+    faraday (2.10.1)
+      faraday-net_http (>= 2.0, < 3.2)
+      logger
+    faraday-net_http (3.1.1)
+      net-http
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-aarch64-linux-musl)
     ffi (1.17.0-arm-linux-gnu)
@@ -173,6 +179,8 @@ GEM
       ruby-progressbar
     msgpack (1.7.2)
     nenv (0.3.0)
+    net-http (0.4.1)
+      uri
     net-imap (0.4.14)
       date
       net-protocol
@@ -315,6 +323,12 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     shellany (0.0.1)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -358,6 +372,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
+    uri (0.13.0)
     useragent (0.16.10)
     web-console (4.2.1)
       actionview (>= 6.0.0)
@@ -402,6 +417,7 @@ DEPENDENCIES
   capybara (= 3.37.1)
   debug
   faker (= 2.21.0)
+  faraday
   guard (= 2.18.0)
   guard-minitest (= 2.4.6)
   importmap-rails
@@ -416,6 +432,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   sass-rails
   selenium-webdriver (= 4.2.0)
+  simplecov
   sprockets-rails
   sqlite3 (>= 1.4)
   stimulus-rails
