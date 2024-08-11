@@ -12,7 +12,9 @@
     </thead>
     <tbody>
     <% @stocks.each do |stock| %>
-      <%= render "stocks/stock_row", stock: stock %>
+      <%= link_to stocks_path do %>
+        <%= render "stocks/stock_row", stock: stock %>
+      <% end %>
     <% end %>
     </tbody>
   </table>
