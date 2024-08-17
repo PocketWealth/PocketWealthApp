@@ -101,6 +101,7 @@ class StocksController < ApplicationController
                                     :share_price,
                                     :quantity_purchased,
                                     :account_id,
-                                    :add_stock_value_to_account)
+                                    :add_stock_value_to_account,
+                                    :symbol_id)
     end
 end

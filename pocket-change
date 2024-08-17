@@ -1,5 +1,14 @@
 pocketchange
 
+encryption keys
+alaws@alaws-linux:~/Documents/Ruby/PocketWealth$ bin/rails db:encryption:init
+Add this entry to the credentials of the target environment: 
+
+active_record_encryption:
+  primary_key: UVxTvwioHsw2lF7piVcrlRESBIwKq0Hs
+  deterministic_key: lQxl6RigBCaG2SSDQVADX0aEgkOfoX9K
+  key_derivation_salt: c8rirGvo7KelK9fkSNLTghsfSm4i4hX2
+
 Data structures
 
 User
@@ -67,3 +76,13 @@ rails generate integration_test stocks_index
 
 
 bin/rails generate controller AccountBalances
+
+rails g migration AddQuestradeTokensToUser questrade_access_token:string questrade_refresh_token:string
+
+rails g migration AddQuestradeUrlToUser questrade_access_token:string questrade_refresh_token:string
+
+rails g migration RemoveQuestradeAttributesFromUser
+
+bin/rails generate scaffold ApiKey provider:string:uniq access_token:string refresh_token:string url:string
+
+rails g migration AddUserToApiKeys user:references

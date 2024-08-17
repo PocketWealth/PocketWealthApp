@@ -1,5 +1,5 @@
 class StockUpdatingService
-  def update_stock(stock, stock_params, user)
+  def update_stock(stock, stock_params)
     stock.update(stock_params)
     respond_to do |format|
       if @stock.update(stock_params)

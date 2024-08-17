@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_10_014913) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_11_202527) do
   create_table "account_balances_2024", force: :cascade do |t|
     t.decimal "account_balance"
     t.integer "account_id", null: false
@@ -29,6 +29,18 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_10_014913) do
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string "provider"
+    t.string "access_token"
+    t.string "refresh_token"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["provider"], name: "index_api_keys_on_provider", unique: true
+    t.index ["user_id"], name: "index_api_keys_on_user_id"
   end
 
   create_table "registered_account_limits_2024", force: :cascade do |t|
@@ -52,6 +64,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_10_014913) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id", null: false
+    t.integer "symbol_id", null: false
     t.index ["account_id"], name: "index_stocks_on_account_id"
   end
 
@@ -85,6 +98,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_10_014913) do
 
   add_foreign_key "account_balances_2024", "accounts"
   add_foreign_key "accounts", "users"
+  add_foreign_key "api_keys", "users"
   add_foreign_key "registered_account_limits_2024", "users"
   add_foreign_key "stocks", "accounts"
   add_foreign_key "transactions_2024", "accounts", column: "from_account_id"
