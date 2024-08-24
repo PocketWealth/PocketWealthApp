@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_11_202527) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_17_181736) do
   create_table "account_balances_2024", force: :cascade do |t|
     t.decimal "account_balance"
     t.integer "account_id", null: false
@@ -64,7 +64,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_11_202527) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id", null: false
-    t.integer "symbol_id", null: false
+    t.string "symbol_id"
+    t.string "broker"
     t.index ["account_id"], name: "index_stocks_on_account_id"
   end
 
