@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_17_181736) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_24_154526) do
   create_table "account_balances_2024", force: :cascade do |t|
     t.decimal "account_balance"
     t.integer "account_id", null: false
@@ -44,8 +44,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_17_181736) do
   end
 
   create_table "registered_account_limits_2024", force: :cascade do |t|
-    t.decimal "tfsa_limit"
-    t.decimal "rrsp_limit"
+    t.decimal "tfsa_limit", default: "0.0", null: false
+    t.decimal "rrsp_limit", default: "0.0", null: false
     t.decimal "tfsa_contributions", default: "0.0", null: false
     t.decimal "rrsp_contributions", default: "0.0", null: false
     t.datetime "created_at", null: false

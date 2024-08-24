@@ -66,12 +66,14 @@ class StocksController < ApplicationController
     @stock = StockDeletingService.new.delete_stock(
       @stock, stock_params
     )
-    if @stock.destroyed?
-      format.html { redirect_to stocks_url, notice: "Stock was successfully destroyed." }
-      format.json { head :no_content }
-    else
-      format.html { render :edit, status: :unprocessable_entity }
-      format.json { render json: @stock.errors, status: :unprocessable_entity }
+    respond_to do |format|
+      if @stock.destroyed?
+        format.html { redirect_to stocks_url, notice: "Stock was successfully destroyed." }
+        format.json { head :no_content }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @stock.errors, status: :unprocessable_entity }
+      end
     end
   end
 
