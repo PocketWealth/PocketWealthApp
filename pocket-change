@@ -86,3 +86,9 @@ rails g migration RemoveQuestradeAttributesFromUser
 bin/rails generate scaffold ApiKey provider:string:uniq access_token:string refresh_token:string url:string
 
 rails g migration AddUserToApiKeys user:references
+
+rails g migration AddSymbolIdToStocks symbolId:integer
+
+rails g migration RenameSymbolIdToSymbolUnderscoreId symbolId:integer
+
+rails g migration UpdateFHSALimitDefaultForRegisteredAccountLimits

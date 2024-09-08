@@ -7,7 +7,11 @@ class StocksController < ApplicationController
 
   # GET /stocks or /stocks.json
   def index
-    @stocks = Stock.all
+    all_stocks = []
+    current_user.accounts.each do |account|
+      all_stocks += account.stocks
+    end
+    @stocks = all_stocks
   end
 
   # GET /stocks/1 or /stocks/1.json
