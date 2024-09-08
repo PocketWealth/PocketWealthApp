@@ -27,7 +27,10 @@ class RegisteredAccountLimitsController < ApplicationController
   # end
 
   def edit
-    @registered_account_limit = RegisteredAccountLimit.find(params[:id])
+    @edit_type = params.require(:edit_type)
+    unless %w[rrsp_limit fhsa_limit tfsa_limit rrsp_contributions fhsa_contributions tfsa_contributions].include?(@edit_type)
+      redirect_to registered_account_limits_url, status: :see_other
+    end
   end
 
   def update

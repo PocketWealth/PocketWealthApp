@@ -40,3 +40,5 @@
 /node_modules/*
 
 pocket-change
+
+doc/*
