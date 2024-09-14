@@ -93,9 +93,10 @@ RSpec.describe "Accounts CRUD Operations" do
     context 'with valid params' do
       it 'adds cash to the account' do
         previous_balance = account.cash
-        patch account_add_cash_path(account), params: {
+        patch account_edit_cash_path(account), params: {
           account: {
-            cash: "1000.0"
+            cash: "1000.0",
+            edit_cash_type: "add"
           }
         }
         expect(response).to have_http_status(:found)
@@ -106,9 +107,10 @@ RSpec.describe "Accounts CRUD Operations" do
     context 'with invalid params' do
       it 'does not add cash to the account' do
         previous_balance = account.cash
-        patch account_add_cash_path(account), params: {
+        patch account_edit_cash_path(account), params: {
           account: {
-            cash: "one thousand dollars"
+            cash: "one thousand dollars",
+            edit_cash_type: "add"
           }
         }
         expect(response).to have_http_status(:found)
@@ -122,9 +124,10 @@ RSpec.describe "Accounts CRUD Operations" do
     context 'with valid params' do
       it 'removes cash from the account' do
         previous_balance = account.cash
-        patch account_remove_cash_path(account), params: {
+        patch account_edit_cash_path(account), params: {
           account: {
-            cash: "1000.0"
+            cash: "1000.0",
+            edit_cash_type: "remove"
           }
         }
         expect(response).to have_http_status(:found)
@@ -135,9 +138,10 @@ RSpec.describe "Accounts CRUD Operations" do
     context 'with invalid params' do
       it 'does not remove cash from the account' do
         previous_balance = account.cash
-        patch account_remove_cash_path(account), params: {
+        patch account_edit_cash_path(account), params: {
           account: {
-            cash: "one thousand dollars"
+            cash: "one thousand dollars",
+            edit_cash_type: "remove"
           }
         }
         expect(response).to have_http_status(:found)
@@ -156,10 +160,11 @@ RSpec.describe "Accounts CRUD Operations" do
           to_account_previous_balance = to_account.cash
           previous_rrsp_contributions = registered_account_limits['rrsp_contributions']
           from_account_previous_balance = account.cash
-          patch account_transfer_cash_path(account), params: {
+          patch account_edit_cash_path(account), params: {
             account: {
               cash: "1000.0",
-              to_account_id: to_account.id
+              to_account_id: to_account.id,
+              edit_cash_type: "transfer"
             }
           }
           expect(response).to have_http_status(:found)
@@ -176,10 +181,11 @@ RSpec.describe "Accounts CRUD Operations" do
           to_account = create(:account, user: user)
           to_account_previous_balance = to_account.cash
           from_account_previous_balance = account.cash
-          patch account_transfer_cash_path(account), params: {
+          patch account_edit_cash_path(account), params: {
             account: {
               cash: "1000.0",
-              to_account_id: to_account.id
+              to_account_id: to_account.id,
+              edit_cash_type: "transfer"
             }
           }
           expect(response).to have_http_status(:found)
@@ -197,10 +203,11 @@ RSpec.describe "Accounts CRUD Operations" do
           to_account_previous_balance = to_account.cash
           previous_rrsp_contributions = registered_account_limits['rrsp_contributions']
           from_account_previous_balance = from_account.cash
-          patch account_transfer_cash_path(from_account), params: {
+          patch account_edit_cash_path(from_account), params: {
             account: {
               cash: "1000.0",
-              to_account_id: to_account.id
+              to_account_id: to_account.id,
+              edit_cash_type: "transfer"
             }
           }
           expect(response).to have_http_status(:found)
@@ -220,10 +227,11 @@ RSpec.describe "Accounts CRUD Operations" do
           to_account_previous_balance = to_account.cash
           previous_rrsp_contributions = registered_account_limits['rrsp_contributions']
           from_account_previous_balance = from_account.cash
-          patch account_transfer_cash_path(from_account), params: {
+          patch account_edit_cash_path(from_account), params: {
             account: {
               cash: "1000.0",
-              to_account_id: to_account.id
+              to_account_id: to_account.id,
+              edit_cash_type: "transfer"
             }
           }
           expect(response).to have_http_status(:found)
@@ -245,10 +253,11 @@ RSpec.describe "Accounts CRUD Operations" do
           fhsa_contributions = registered_account_limits['fhsa_contributions']
           to_account_previous_balance = to_account.cash
           from_account_previous_balance = from_account.cash
-          patch account_transfer_cash_path(from_account), params: {
+          patch account_edit_cash_path(from_account), params: {
             account: {
               cash: "1000.0",
-              to_account_id: to_account.id
+              to_account_id: to_account.id,
+              edit_cash_type: "transfer"
             }
           }
           expect(response).to have_http_status(:found)
@@ -267,10 +276,11 @@ RSpec.describe "Accounts CRUD Operations" do
       it 'does not allow transfers with invalid params' do
         from_account = create(:account, user: user)
         previous_account_balance = from_account.cash
-        patch account_transfer_cash_path(from_account), params: {
+        patch account_edit_cash_path(from_account), params: {
           account: {
             cash: "1000.0",
-            to_account_id: "invalid-id"
+            to_account_id: "invalid-id",
+            edit_cash_type: "transfer"
           }
         }
         expect(response).to have_http_status(:bad_request)
@@ -282,10 +292,11 @@ RSpec.describe "Accounts CRUD Operations" do
         other_user_account = create(:account, user: other_user)
         from_account = create(:account, user: user)
         previous_account_balance = from_account.cash
-        patch account_transfer_cash_path(from_account), params: {
+        patch account_edit_cash_path(from_account), params: {
           account: {
             cash: "1000.0",
-            to_account_id: other_user_account.id
+            to_account_id: other_user_account.id,
+            edit_cash_type: "transfer"
           }
         }
         expect(response).to have_http_status(:bad_request)
@@ -295,10 +306,11 @@ RSpec.describe "Accounts CRUD Operations" do
       it 'does not allow transfers to the same account' do
         from_account = create(:account, user: user)
         previous_account_balance = from_account.cash
-        patch account_transfer_cash_path(from_account), params: {
+        patch account_edit_cash_path(from_account), params: {
           account: {
             cash: "1000.0",
-            to_account_id: from_account.id
+            to_account_id: from_account.id,
+            edit_cash_type: "transfer"
           }
         }
         expect(response).to have_http_status(:bad_request)

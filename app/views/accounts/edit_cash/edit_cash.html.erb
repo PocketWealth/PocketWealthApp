@@ -1,5 +1,5 @@
 <div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl mb-5">Add Cash To Account</h1>
+  <h1 class="font-bold text-4xl mb-5"><%= @edit_type.capitalize %> Cash</h1>
   <div class="stats shadow">
     <div class="stat">
       <div class="stat-figure text-primary">
@@ -8,7 +8,8 @@
       <div class="stat-value text-primary">$<%= @account.cash %></div>
     </div>
   </div>
-  <%= render "accounts/add_cash/add_cash_form", account: @account %>
+
+  <%= render "accounts/edit_cash/edit_cash", account: @account, edit_type: @edit_type, to_accounts: @to_accounts %>
 
   <%= link_to "Show this account", @account, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   <%= link_to "Back to accounts", accounts_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>

@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   before_action :logged_in_user
-  before_action :set_account, only: %i[ show edit update destroy add_cash remove_cash update_add_cash update_remove_cash transfer_cash update_transfer_cash ]
+  before_action :set_account, only: %i[ show edit update destroy edit_cash update_edit_cash ]
 
   # GET /accounts or /accounts.json
   def index
@@ -21,50 +21,23 @@ class AccountsController < ApplicationController
   def edit
   end
 
-  def add_cash
-    render template: "accounts/add_cash/add_cash"
-  end
-
-  def update_add_cash
-    @account = AccountUpdatingService.new.add_cash_to_account(@account, account_params)
-    respond_to do |format|
-      if @account.valid?
-        format.html { redirect_to account_url(@account), notice: "Cash added to account" }
-        format.json { render :show, status: :created, location: @account }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
+  def edit_cash
+    @edit_type = params.require(:edit_type)
+    unless %w[add remove transfer].include?(@edit_type)
+      redirect_to accounts_path, status: :see_other
+      return
     end
-  end
-
-  def remove_cash
-    render template: "accounts/remove_cash/remove_cash"
-  end
-
-  def update_remove_cash
-    @account = AccountUpdatingService.new.remove_cash_from_account(@account, account_params)
-    respond_to do |format|
-      if @account.valid?
-        format.html { redirect_to account_url(@account), notice: "Cash removed from account" }
-        format.json { render :show, status: :created, location: @account }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
+    if @edit_type == "transfer"
+      @to_accounts = current_user.accounts.reject { |account| account.id == @account.id } || []
     end
+    render template: "accounts/edit_cash/edit_cash"
   end
 
-  def transfer_cash
-    @to_accounts = current_user.accounts.reject { |account| account.id == @account.id } || []
-    render template: "accounts/transfer_cash/transfer_cash"
-  end
-
-  def update_transfer_cash
-    @account = AccountUpdatingService.new.transfer_cash(@account, current_user, account_params)
+  def update_edit_cash
+    @account = AccountUpdatingService.new.edit_account_cash(@account, current_user, account_params)
     respond_to do |format|
       if @account.valid?
-        format.html { redirect_to account_url(@account), notice: "Cash transferred to account" }
+        format.html { redirect_to account_url(@account), notice: "Account updated successfully" }
         format.json { render :show, status: :created, location: @account }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -120,6 +93,6 @@ class AccountsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def account_params
-    params.require(:account).permit(:name, :cash, :description, :financial_institution, :account_type, :to_account_id)
+    params.require(:account).permit(:name, :cash, :description, :financial_institution, :account_type, :to_account_id, :edit_cash_type)
   end
 end

@@ -31,6 +31,19 @@ class AccountUpdatingService
     account.update(account_params)
   end
 
+  def edit_account_cash(from_account, current_user, account_params)
+    edit_type = account_params[:edit_cash_type]
+    if edit_type == "add"
+      add_cash_to_account(from_account, account_params)
+    elsif edit_type == "remove"
+      remove_cash_from_account(from_account, account_params)
+    elsif edit_type == "transfer"
+      transfer_cash(from_account, current_user, account_params)
+    else
+      raise ActionController::BadRequest
+    end
+  end
+
   def add_cash_to_account(account, account_params)
     cash_to_add = account_params[:cash].to_d
     return account unless cash_to_add.positive?
