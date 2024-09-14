@@ -1,0 +1,17 @@
+<%# locals: (account_type:, registered_account_limit:) %>
+
+<div class="stats bg-primary text-primary-content">
+  <% %w[limit contributions].each do |account_suffix| %>
+    <div class="stat w-96">
+      <%= turbo_frame_tag "registered_account_limit_#{account_type}_#{account_suffix}" do %>
+        <div class="stat-title"><%= account_type.upcase %> <%= account_suffix.capitalize %></div>
+        <div>
+          <div class="stat-value"><%=@registered_account_limit["#{account_type}_#{account_suffix}"] %></div>
+          <div class="stat-actions">
+            <%= link_to "Update", edit_registered_account_limit_path(@registered_account_limit, :edit_type => "#{account_type}_#{account_suffix}"), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

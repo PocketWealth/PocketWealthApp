@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="my-5">
+    <%= form.label :broker %>
+    <%= form.select(:broker, Stock.brokers.keys, {include_blank: true}, { :class => 'block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full' }) %>
+  </div>
+
+  <div class="my-5">
     <%= form.label :symbol %>
     <%= form.text_field :symbol, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
@@ -34,6 +39,11 @@
   <div class="my-5">
     <%= form.label :account_id %>
     <%= form.select(:account_id, options_from_collection_for_select(@accounts, :id, :name), {}, { :class => 'block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full' }) %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :symbol_id, "Broker Symbol" %>
+    <%= form.text_field :symbol_id, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">

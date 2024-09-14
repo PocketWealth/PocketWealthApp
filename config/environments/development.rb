@@ -80,4 +80,8 @@ Rails.application.configure do
   # config.generators.apply_rubocop_autocorrect_after_generate!
   config.cache_store = :redis_cache_store, { url: ENV["REDIS_URL"], expires_in: 5.minutes }
 
+  # Full error reports are disabled and caching is turned on.
+  # config.consider_all_requests_local = false
+  # config.action_controller.perform_caching = true
+
 end

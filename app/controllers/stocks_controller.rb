@@ -7,7 +7,11 @@ class StocksController < ApplicationController
 
   # GET /stocks or /stocks.json
   def index
-    @stocks = Stock.all
+    all_stocks = []
+    current_user.accounts.each do |account|
+      all_stocks += account.stocks
+    end
+    @stocks = all_stocks
   end
 
   # GET /stocks/1 or /stocks/1.json
@@ -63,13 +67,17 @@ class StocksController < ApplicationController
 
   # DELETE /stocks/1 or /stocks/1.json
   def destroy
-    StockDeletingService.new.delete_stock(
+    @stock = StockDeletingService.new.delete_stock(
       @stock, stock_params
     )
-
     respond_to do |format|
-      format.html { redirect_to stocks_url, notice: "Stock was successfully destroyed." }
-      format.json { head :no_content }
+      if @stock.destroyed?
+        format.html { redirect_to stocks_url, notice: "Stock was successfully destroyed." }
+        format.json { head :no_content }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @stock.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -101,6 +109,8 @@ class StocksController < ApplicationController
                                     :share_price,
                                     :quantity_purchased,
                                     :account_id,
-                                    :add_stock_value_to_account)
+                                    :add_stock_value_to_account,
+                                    :symbol_id,
+                                    :broker)
     end
 end
