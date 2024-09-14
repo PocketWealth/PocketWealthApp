@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   before_action :logged_in_user
-  before_action :set_account, only: %i[ show edit update destroy add_cash remove_cash update_add_cash update_remove_cash ]
+  before_action :set_account, only: %i[ show edit update destroy add_cash remove_cash update_add_cash update_remove_cash transfer_cash update_transfer_cash ]
 
   # GET /accounts or /accounts.json
   def index
@@ -55,6 +55,24 @@ class AccountsController < ApplicationController
     end
   end
 
+  def transfer_cash
+    @to_accounts = current_user.accounts.reject { |account| account.id == @account.id } || []
+    render template: "accounts/transfer_cash/transfer_cash"
+  end
+
+  def update_transfer_cash
+    @account = AccountUpdatingService.new.transfer_cash(@account, current_user, account_params)
+    respond_to do |format|
+      if @account.valid?
+        format.html { redirect_to account_url(@account), notice: "Cash transferred to account" }
+        format.json { render :show, status: :created, location: @account }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @account.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # POST /accounts or /accounts.json
   def create
     @account = Account.new(account_params)
@@ -94,13 +112,14 @@ class AccountsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_account
-      @account = Account.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def account_params
-      params.require(:account).permit(:name, :cash, :description, :financial_institution, :account_type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_account
+    @account = Account.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def account_params
+    params.require(:account).permit(:name, :cash, :description, :financial_institution, :account_type, :to_account_id)
+  end
 end

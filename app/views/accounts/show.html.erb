@@ -19,6 +19,7 @@
       <%= link_to "Back to accounts", accounts_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       <%= link_to "Add Cash", account_add_cash_path(@account), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       <%= link_to "Remove Cash", account_remove_cash_path(@account), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <%= link_to "Transfer Cash", account_transfer_cash_path(@account), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       <div class="inline-block ml-2">
         <%= button_to "Destroy this account", @account, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
       </div>

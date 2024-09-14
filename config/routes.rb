@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   patch "/accounts/:id/add_cash",  to: "accounts#update_add_cash", as: "account_update_add_cash"
   get "/accounts/:id/remove_cash",  to: "accounts#remove_cash", as: "account_remove_cash"
   patch "/accounts/:id/remove_cash",  to: "accounts#update_remove_cash", as: "account_update_remove_cash"
+  get "/accounts/:id/transfer_cash",  to: "accounts#transfer_cash", as: "account_transfer_cash"
+  patch "/accounts/:id/transfer_cash",  to: "accounts#update_transfer_cash", as: "account_update_transfer_cash"
   # <=== Stocks ===>
   get "/stocks/:id/delete",  to: "stocks#delete"
 
