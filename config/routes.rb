@@ -9,10 +9,8 @@ Rails.application.routes.draw do
   get "/signup",  to: "users#new"
   # <=== Accounts ===>
   get "/home",  to: "accounts#index"
-  get "/accounts/:id/add_cash",  to: "accounts#add_cash", as: "account_add_cash"
-  patch "/accounts/:id/add_cash",  to: "accounts#update_add_cash", as: "account_update_add_cash"
-  get "/accounts/:id/remove_cash",  to: "accounts#remove_cash", as: "account_remove_cash"
-  patch "/accounts/:id/remove_cash",  to: "accounts#update_remove_cash", as: "account_update_remove_cash"
+  get "/accounts/:id/edit_cash",  to: "accounts#edit_cash", as: "account_edit_cash"
+  patch "/accounts/:id/edit_cash",  to: "accounts#update_edit_cash", as: "account_update_edit_cash"
   # <=== Stocks ===>
   get "/stocks/:id/delete",  to: "stocks#delete"
 
