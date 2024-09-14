@@ -89,6 +89,64 @@ RSpec.describe "Accounts CRUD Operations" do
     end
   end
 
+  describe 'Add Cash' do
+    context 'with valid params' do
+      it 'adds cash to the account' do
+        previous_balance = account.cash
+        patch account_add_cash_path(account), params: {
+          account: {
+            cash: "1000.0"
+          }
+        }
+        expect(response).to have_http_status(:found)
+        account.reload
+        expect(account.cash).to eq(previous_balance + 1000)
+      end
+    end
+    context 'with invalid params' do
+      it 'does not add cash to the account' do
+        previous_balance = account.cash
+        patch account_add_cash_path(account), params: {
+          account: {
+            cash: "one thousand dollars"
+          }
+        }
+        expect(response).to have_http_status(:found)
+        account.reload
+        expect(account.cash).to eq(previous_balance)
+      end
+    end
+  end
+
+  describe 'Remove Cash' do
+    context 'with valid params' do
+      it 'removes cash from the account' do
+        previous_balance = account.cash
+        patch account_remove_cash_path(account), params: {
+          account: {
+            cash: "1000.0"
+          }
+        }
+        expect(response).to have_http_status(:found)
+        account.reload
+        expect(account.cash).to eq(previous_balance - 1000)
+      end
+    end
+    context 'with invalid params' do
+      it 'does not remove cash from the account' do
+        previous_balance = account.cash
+        patch account_remove_cash_path(account), params: {
+          account: {
+            cash: "one thousand dollars"
+          }
+        }
+        expect(response).to have_http_status(:found)
+        account.reload
+        expect(account.cash).to eq(previous_balance)
+      end
+    end
+  end
+
   describe 'DELETE accounts' do
     it 'deletes the account' do
       account_id = account.id
