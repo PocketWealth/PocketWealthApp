@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   before_action :logged_in_user
-  before_action :set_account, only: %i[ show edit update destroy ]
+  before_action :set_account, only: %i[ show edit update destroy add_cash remove_cash update_add_cash update_remove_cash ]
 
   # GET /accounts or /accounts.json
   def index
@@ -19,6 +19,40 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
+  end
+
+  def add_cash
+    render template: "accounts/add_cash/add_cash"
+  end
+
+  def update_add_cash
+    @account = AccountUpdatingService.new.add_cash_to_account(@account, account_params)
+    respond_to do |format|
+      if @account.valid?
+        format.html { redirect_to account_url(@account), notice: "Cash added to account" }
+        format.json { render :show, status: :created, location: @account }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @account.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def remove_cash
+    render template: "accounts/remove_cash/remove_cash"
+  end
+
+  def update_remove_cash
+    @account = AccountUpdatingService.new.remove_cash_from_account(@account, account_params)
+    respond_to do |format|
+      if @account.valid?
+        format.html { redirect_to account_url(@account), notice: "Cash removed from account" }
+        format.json { render :show, status: :created, location: @account }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @account.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /accounts or /accounts.json
