@@ -1,6 +1,6 @@
 class StocksController < ApplicationController
   before_action :logged_in_user
-  before_action :set_stock, only: %i[ show edit update destroy delete ]
+  before_action :set_stock, only: %i[ show edit update destroy delete edit_transfer_stock update_transfer_stock]
   before_action :set_user
   before_action :set_accounts
 
@@ -27,15 +27,36 @@ class StocksController < ApplicationController
   def edit
   end
 
+  def edit_transfer_stock
+    from_account = @stock.account
+    @to_accounts = current_user.accounts.reject { |account| account.id == from_account.id } || []
+  end
+
+  def update_transfer_stock
+    account_updating_service = AccountUpdatingService.new(current_user)
+    @stock = StockTransferService.new(user: current_user, account_updating_service: account_updating_service)
+                                 .transfer_stock(stock: @stock, to_account_id: params[:stock][:to_account_id], quantity: params[:stock][:transfer_quantity].to_d)
+    respond_to do |format|
+      if @stock.valid?
+        format.html { redirect_to stock_path(@stock), notice: "Stock updated successfully" }
+        format.json { render :show, status: :created, location: @stock }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @stock.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # POST /stocks or /stocks.json
   def create
-    params = stock_params
-    @stock = Stock.new(params)
-    unless user_owns_account?(params[:account_id])
+    unless user_owns_account?(stock_params[:account_id])
       flash.now[:danger] = "Something went wrong, please reload the page and try again" # Not quite right!
       render "new", status: :unprocessable_entity
       return
     end
+    account_updating_service = AccountUpdatingService.new(current_user)
+    @stock = StockCreatingService.new(user: current_user, account_updating_service: account_updating_service)
+                                 .create_stock(stock_params, params[:stock][:update_account])
     respond_to do |format|
       if @stock.save
         format.html { redirect_to stock_url(@stock), notice: "Stock was successfully created." }
@@ -67,7 +88,8 @@ class StocksController < ApplicationController
 
   # DELETE /stocks/1 or /stocks/1.json
   def destroy
-    @stock = StockDeletingService.new.delete_stock(
+    account_updating_service = AccountUpdatingService.new(current_user)
+    @stock = StockDeletingService.new(account_updating_service: account_updating_service).delete_stock(
       @stock, stock_params
     )
     respond_to do |format|
@@ -110,6 +132,7 @@ class StocksController < ApplicationController
                                     :quantity_purchased,
                                     :account_id,
                                     :add_stock_value_to_account,
+                                    :to_account_id,
                                     :symbol_id,
                                     :broker)
     end

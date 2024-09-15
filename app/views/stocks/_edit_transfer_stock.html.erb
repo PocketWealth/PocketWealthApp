@@ -1,0 +1,29 @@
+<%# locals: (stock:, to_accounts:) %>
+
+<%= form_with(url: "/stocks/#{stock.id}/transfer_stock", model: stock, class: "contents") do |form| %>
+  <% if stock.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(stock.errors.count, "error") %> prohibited this stock from being saved:</h2>
+
+      <ul>
+        <% stock.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :transfer_quantity %>
+    <%= form.number_field :transfer_quantity, value: stock.quantity_purchased, min: 1, max: stock.quantity_purchased, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :to_account_id %>
+    <%= form.select(:to_account_id, options_from_collection_for_select(to_accounts, :id, :name), {}, { :class => 'block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full' }) %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit "Transfer Stock", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

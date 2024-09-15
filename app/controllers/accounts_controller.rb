@@ -34,7 +34,7 @@ class AccountsController < ApplicationController
   end
 
   def update_edit_cash
-    @account = AccountUpdatingService.new.edit_account_cash(@account, current_user, account_params)
+    @account = AccountUpdatingService.new(current_user).edit_account_cash(@account, account_params)
     respond_to do |format|
       if @account.valid?
         format.html { redirect_to account_url(@account), notice: "Account updated successfully" }

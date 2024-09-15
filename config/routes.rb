@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   patch "/accounts/:id/edit_cash",  to: "accounts#update_edit_cash", as: "account_update_edit_cash"
   # <=== Stocks ===>
   get "/stocks/:id/delete",  to: "stocks#delete"
+  get "/stocks/:id/transfer_stock",  to: "stocks#edit_transfer_stock", as: "edit_transfer_stock"
+  patch "/stocks/:id/transfer_stock",  to: "stocks#update_transfer_stock", as: "update_transfer_stock"
 
 
   # <=== Resources ===>

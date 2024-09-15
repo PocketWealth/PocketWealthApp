@@ -1,0 +1,19 @@
+<div class="mx-auto md:w-2/3 w-full">
+  <h1 class="font-bold text-4xl mb-5">Transfer Stock</h1>
+  <div class="stats shadow">
+    <div class="stat">
+      <div class="stat-figure text-primary">
+      </div>
+      <div class="stat-title">Stock</div>
+      <div class="stat-value text-primary">$<%= @stock.symbol %></div>
+      <div class="stat-value text-primary">Quantity: <%= @stock.quantity_purchased %></div>
+      <div class="stat-value text-primary">Value: $<%= @stock.quantity_purchased * @stock.share_price %></div>
+      <div class="stat-value text-primary">Account: <%= @stock.account.name %></div>
+    </div>
+  </div>
+
+  <%= render "edit_transfer_stock", stock: @stock, to_accounts: @to_accounts %>
+
+  <%= link_to "Show this stock", @stock, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <%= link_to "Back to stocks", stocks_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+</div>

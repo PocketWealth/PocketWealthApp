@@ -17,6 +17,7 @@
       <%= render @stock %>
 
       <%= link_to "Edit this stock", edit_stock_path(@stock), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <%= link_to "Transfer this stock", edit_transfer_stock_path(@stock), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       <%= link_to "Back to stocks", stocks_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       <div class="inline-block ml-2">
         <%= link_to "Delete Stock", delete_stock_path(@stock), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"%>
