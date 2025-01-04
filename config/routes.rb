@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :accounts
   resources :registered_account_limits
   resources :stocks
+  resources :transactions
 
 
   # <=== Root Path ===>

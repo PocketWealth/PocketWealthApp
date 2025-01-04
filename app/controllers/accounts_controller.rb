@@ -52,7 +52,7 @@ class AccountsController < ApplicationController
     @account.user_id = current_user.id
     respond_to do |format|
       if @account.save
-        format.html { redirect_to account_url(@account), notice: "Account was successfully created." }
+        format.html { redirect_to account_url(@account) }
         format.json { render :show, status: :created, location: @account }
       else
         format.html { render :new, status: :unprocessable_entity }

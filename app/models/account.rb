@@ -4,4 +4,5 @@ class Account < ApplicationRecord
   belongs_to :user
   has_many :stocks
   has_many :account_balances
+  has_many :transactions, class_name: "Transaction", foreign_key: "from_account_id"
 end

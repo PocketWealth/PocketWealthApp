@@ -1,6 +1,6 @@
 class CreateTransactions < ActiveRecord::Migration[7.2]
   def change
-    create_table :transactions_2024 do |t|
+    create_table :transactions_2025 do |t|
       t.string :type
       t.decimal :funds_value_added, default: "0.0"
       t.decimal :funds_value_removed, default: "0.0"
@@ -17,7 +17,7 @@ class CreateTransactions < ActiveRecord::Migration[7.2]
 
       t.timestamps
     end
-    add_foreign_key :transactions_2024, :accounts, column: :from_account_id, primary_key: "id"
-    add_foreign_key :transactions_2024, :accounts, column: :to_account_id, primary_key: "id"
+    add_foreign_key :transactions_2025, :accounts, column: :from_account_id, primary_key: "id"
+    add_foreign_key :transactions_2025, :accounts, column: :to_account_id, primary_key: "id"
   end
 end
