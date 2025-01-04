@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_08_181514) do
-  create_table "account_balances_2024", force: :cascade do |t|
+ActiveRecord::Schema[7.2].define(version: 2025_01_04_170356) do
+  create_table "account_balances_2025", force: :cascade do |t|
     t.decimal "account_balance"
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_08_181514) do
     t.index ["user_id"], name: "index_api_keys_on_user_id"
   end
 
-  create_table "registered_account_limits_2024", force: :cascade do |t|
+  create_table "registered_account_limits_2025", force: :cascade do |t|
     t.decimal "tfsa_limit", default: "0.0", null: false
     t.decimal "rrsp_limit", default: "0.0", null: false
     t.decimal "tfsa_contributions", default: "0.0", null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_08_181514) do
     t.integer "user_id", null: false
     t.decimal "fhsa_limit", default: "0.0", null: false
     t.decimal "fhsa_contributions", default: "0.0", null: false
-    t.index ["user_id"], name: "index_registered_account_limits_2024_on_user_id", unique: true
+    t.index ["user_id"], name: "index_registered_account_limits_2025_on_user_id", unique: true
   end
 
   create_table "stocks", force: :cascade do |t|
@@ -69,8 +69,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_08_181514) do
     t.index ["account_id"], name: "index_stocks_on_account_id"
   end
 
-  create_table "transactions_2024", force: :cascade do |t|
-    t.string "type"
+  create_table "transactions_2025", force: :cascade do |t|
+    t.string "transaction_type"
     t.decimal "funds_value_added", default: "0.0"
     t.decimal "funds_value_removed", default: "0.0"
     t.decimal "funds_value_transferred", default: "0.0"
@@ -97,11 +97,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_08_181514) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "account_balances_2024", "accounts"
+  add_foreign_key "account_balances_2025", "accounts"
   add_foreign_key "accounts", "users"
   add_foreign_key "api_keys", "users"
-  add_foreign_key "registered_account_limits_2024", "users"
+  add_foreign_key "registered_account_limits_2025", "users"
   add_foreign_key "stocks", "accounts"
-  add_foreign_key "transactions_2024", "accounts", column: "from_account_id"
-  add_foreign_key "transactions_2024", "accounts", column: "to_account_id"
+  add_foreign_key "transactions_2025", "accounts", column: "from_account_id"
+  add_foreign_key "transactions_2025", "accounts", column: "to_account_id"
 end

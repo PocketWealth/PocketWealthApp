@@ -7,8 +7,4 @@ module ApplicationHelper
   def delete_stock_path(stock)
     "/stocks/#{stock.id}/delete"
   end
-
-  def transfer_stock_path(stock)
-    "/stocks/#{stock.id}/transfer"
-  end
 end
