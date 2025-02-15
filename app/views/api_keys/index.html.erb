@@ -1,23 +1,31 @@
 <div class="flex flex-row">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
-  <%= render "layouts/sidenav" %>
-
-
-  <% content_for :title, "Api keys" %>
-
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Api keys</h1>
-    <%= link_to "New api key", new_api_key_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  <div>
+    <%= render "layouts/sidenav" %>
   </div>
+  <% content_for :title, "API Keys" %>
 
-  <div id="api_keys" class="min-w-full">
-    <% @api_keys.each do |api_key| %>
-      <%= render api_key %>
-      <p>
-        <%= link_to "Show this api key", api_key, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
-    <% end %>
+  <div>
+    <div>
+      <h1 class="text-4xl font-bold ml-5">API Key</h1>
+      <% if notice.present? %>
+        <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block ml-5" id="notice"><%= notice %></p>
+      <% end %>
+    </div>
+    <div class="flex flex-row flex-wrap gap-5 ml-5 mr-5 mt-5">
+      <div class="card bg-primary w-96 shadow-xl">
+        <div class="card-body flex-1">
+          <h2 class="card-title">New API Key</h2>
+          <div class="card-actions mt-auto justify-center">
+            <%= link_to "New api key", new_api_key_path, class: "btn btn-accent" %>
+          </div>
+        </div>
+      </div>
+      <div id="api_keys" class="min-w-full">
+        <% @api_keys.each do |api_key| %>
+          <%= render "api_key_preview", api_key: api_key %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
+

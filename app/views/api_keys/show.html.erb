@@ -1,16 +1,47 @@
 <div class="flex flex-row">
-  <%= render "layouts/sidenav" %>
-  <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-    <% end %>
+  <div>
+    <%= render "layouts/sidenav" %>
+  </div>
 
-    <%= render @api_key %>
+  <% content_for :title, "API Key" %>
 
-    <%= link_to "Edit this api key", edit_api_key_path(@api_key), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Back to api keys", api_keys_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this api key", @api_key, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+  <div>
+    <div>
+      <h1 class="text-4xl font-bold ml-5">API Key <%= @api_key.provider %></h1>
     </div>
+    <div class="ml-5">
+      <% if notice.present? %>
+        <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+      <% end %>
+
+      <div class="bg-white rounded-lg shadow-md">
+        <h1 class="text-xl font-bold text-gray-900 mt-3">Access Token</h1>
+        <p class="font-mono bg-gray-50 rounded-md text-gray-600 break-all">
+          <%= @api_key.access_token %>
+        </p>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md">
+        <h1 class="text-xl font-bold text-gray-900 mt-3">Refresh Token</h1>
+        <p class="font-mono bg-gray-50 rounded-md text-gray-600 break-all">
+          <%= @api_key.refresh_token %>
+        </p>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md">
+        <h1 class="text-xl font-bold text-gray-900 mt-3">URL</h1>
+        <p class="font-mono bg-gray-50 rounded-md text-gray-600 break-all">
+          <%= @api_key.url %>
+        </p>
+      </div>
+
+      <div class="mt-5">
+        <%= link_to "Edit this API key", edit_api_key_path(@api_key), class: "btn btn-primary" %>
+        <div class="inline-block ml-2">
+          <%= button_to "Delete this API key", @api_key, method: :delete, class: "btn btn-warning" %>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

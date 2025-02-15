@@ -2,9 +2,6 @@
   <div>
     <%= render "layouts/sidenav" %>
   </div>
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
 
   <% content_for :title, "Stock" %>
 
@@ -12,6 +9,9 @@
     <div>
       <h1 class="text-4xl font-bold ml-5"><%= @stock.symbol %></h1>
       <h1 class="text-4xl font-bold ml-5"><%= @stock.account.name %></h1>
+      <% if notice.present? %>
+        <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block ml-5" id="notice"><%= notice %></p>
+      <% end %>
     </div>
     <div class="ml-5">
       <%= render @stock %>
