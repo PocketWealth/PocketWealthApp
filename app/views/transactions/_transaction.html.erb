@@ -1,0 +1,102 @@
+<div class="bg-white rounded-lg shadow-md p-6 max-w-2xl mx-auto">
+  <div class="mb-6">
+    <h2 class="text-2xl font-bold text-gray-800 mb-2">Transaction Details</h2>
+    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+      <%= transaction.transaction_type %>
+    </span>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4">
+    <div class="col-span-2 bg-gray-50 p-4 rounded-lg mb-4">
+      <h3 class="font-semibold text-gray-700 mb-2">Funds Information</h3>
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <p class="text-sm text-gray-500">Funds Added</p>
+          <p class="font-medium text-green-600">
+            <%= number_to_currency(transaction.funds_value_added) %>
+          </p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Funds Removed</p>
+          <p class="font-medium text-red-600">
+            <%= number_to_currency(transaction.funds_value_removed) %>
+          </p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Funds Transferred</p>
+          <p class="font-medium text-blue-600">
+            <%= number_to_currency(transaction.funds_value_transferred) %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <% if transaction.stock_symbol.present? %>
+      <div class="col-span-2 bg-gray-50 p-4 rounded-lg mb-4">
+        <h3 class="font-semibold text-gray-700 mb-2">Stock Information</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <p class="text-sm text-gray-500">Symbol</p>
+            <p class="font-medium"><%= transaction.stock_symbol %></p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">Quantity</p>
+            <p class="font-medium"><%= transaction.stock_quantity %></p>
+          </div>
+          <% if transaction.stock_value_added > 0 %>
+            <div>
+              <p class="text-sm text-gray-500">Stock Value Added</p>
+              <p class="font-medium text-green-600">
+                <%= number_to_currency(transaction.stock_value_added) %>
+              </p>
+            </div>
+          <% end %>
+          <% if transaction.stock_value_removed > 0 %>
+            <div>
+              <p class="text-sm text-gray-500">Stock Value Removed</p>
+              <p class="font-medium text-red-600">
+                <%= number_to_currency(transaction.stock_value_removed) %>
+              </p>
+            </div>
+          <% end %>
+          <% if transaction.stock_value_transferred > 0 %>
+            <div>
+              <p class="text-sm text-gray-500">Stock Value Transferred</p>
+              <p class="font-medium text-blue-600">
+                <%= number_to_currency(transaction.stock_value_transferred) %>
+              </p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="col-span-2 grid grid-cols-2 gap-4">
+      <div>
+        <p class="text-sm text-gray-500">From Account</p>
+        <p class="font-medium"><%= transaction.from_account.try(:name) || 'N/A' %></p>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">To Account</p>
+        <p class="font-medium"><%= transaction.to_account.try(:name) || 'N/A' %></p>
+      </div>
+    </div>
+
+    <div class="col-span-2">
+      <div class="border-t pt-4 mt-4">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-sm text-gray-500">Transaction Date</p>
+            <p class="font-medium">
+              <%= transaction.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+            </p>
+          </div>
+          <div class="text-right">
+            <p class="text-sm text-gray-500">Transaction ID</p>
+            <p class="font-medium text-gray-600">#<%= transaction.id %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

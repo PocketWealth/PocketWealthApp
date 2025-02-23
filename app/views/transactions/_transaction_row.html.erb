@@ -1,15 +1,9 @@
 <tr>
   <th></th>
   <td><%= transaction.transaction_type %></td>
-  <td><%= transaction.funds_value_added %></td>
-  <td><%= transaction.funds_value_removed %></td>
-  <td><%= transaction.funds_value_transferred %></td>
-  <td><%= transaction.stock_symbol %></td>
-  <td><%= transaction.stock_quantity %></td>
-  <td><%= transaction.stock_value_added %></td>
-  <td><%= transaction.stock_value_removed %></td>
-  <td><%= transaction.stock_value_transferred %></td>
-  <td><%= transaction.from_account_id %></td>
-  <td><%= transaction.to_account_id %></td>
-  <td><%= transaction.created_at %></td>
+  <td><%= transaction_value_sum(transaction) %></td>
+  <td><%= transaction.from_account.name %></td>
+  <td><%= transaction.to_account.name %></td>
+  <td><%= transaction.transaction_date %></td>
+  <td><%= link_to "View", transaction_path(transaction), :transaction => transaction, :class => "btn btn-primary" %></td>
 </tr>

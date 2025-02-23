@@ -1,0 +1,84 @@
+<%= form_with(model: transaction, class: "contents") do |form| %>
+  <% if transaction.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+      <ul>
+        <% transaction.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :transaction_type, class: "block font-medium text-gray-700 mb-1" %>
+    <%= form.select :transaction_type, ['Deposit', 'Withdrawal', 'Transfer', 'Stock Purchase', 'Stock Sale'], {}, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="my-5">
+      <%= form.label :funds_value_added, class: "block font-medium text-gray-700 mb-1" %>
+      <%= form.number_field :funds_value_added, step: :any, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :funds_value_removed, class: "block font-medium text-gray-700 mb-1" %>
+      <%= form.number_field :funds_value_removed, step: :any, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :funds_value_transferred, class: "block font-medium text-gray-700 mb-1" %>
+      <%= form.number_field :funds_value_transferred, step: :any, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="my-5">
+      <%= form.label :stock_symbol, class: "block font-medium text-gray-700 mb-1" %>
+      <%= form.text_field :stock_symbol, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :stock_quantity, class: "block font-medium text-gray-700 mb-1" %>
+      <%= form.number_field :stock_quantity, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="my-5">
+      <%= form.label :stock_value_added, class: "block font-medium text-gray-700 mb-1" %>
+      <%= form.number_field :stock_value_added, step: :any, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :stock_value_removed, class: "block font-medium text-gray-700 mb-1" %>
+      <%= form.number_field :stock_value_removed, step: :any, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :stock_value_transferred, class: "block font-medium text-gray-700 mb-1" %>
+      <%= form.number_field :stock_value_transferred, step: :any, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="my-5">
+      <%= form.label :from_account_id, class: "block font-medium text-gray-700 mb-1" %>
+      <%= form.select(:from_account_id, options_from_collection_for_select(@accounts, :id, :name), {}, { :class => 'block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full' }) %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :to_account_id, class: "block font-medium text-gray-700 mb-1" %>
+      <%= form.select(:to_account_id, options_from_collection_for_select(@accounts, :id, :name), {}, { :class => 'block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full' }) %>
+    </div>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :transaction_date, class: "block font-medium text-gray-700 mb-1" %>
+    <%= form.date_field :transaction_date, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
